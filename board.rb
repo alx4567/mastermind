@@ -2,10 +2,10 @@ class Board < Key
     attr_reader :board, :bulls, :cows
 
     def initialize
-        @correct_key = [1,2,3,5]
+        @correct_key = []
         @prev_guess = []
         @board = []
-        # generate_key
+        generate_key
     end
 
     # Checks if numbers are in the exact same spot as the key
@@ -54,16 +54,17 @@ class Board < Key
 
     # Do players want to play a new game?
     def play_again?
-        puts "Do you want to play again? (y/n)"
+        puts "\nDo you want to play again? (y/n)"
         while answer = gets.chomp.downcase
             case answer
             when "y"
                 generate_key
                 @board = []
                 answer = false
+                puts "\nStarting New Game."
                 break
             when "n"
-                puts "Goodbye!"
+                puts "\nGoodbye."
                 answer = true
                 break
             else

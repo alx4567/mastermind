@@ -29,10 +29,7 @@ sleep 1
 
 #Gameplay
 until stop
-    puts "\n#{active_player.name}'s turn. What is your guess?"
-    guess = gets.chomp
-    guess = guess.split('').map(&:to_i)
-    active_player.player_guess(guess[0], guess[1], guess[2], guess[3])
+    active_player.player_guess
 
     if game.game_won?(active_player.current_guess)
         game.display_board(active_player.current_guess)
