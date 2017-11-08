@@ -8,7 +8,7 @@ class Key
 
         no_duplicates_in_key
           
-        @correct_key << @key1 << @key2 << @key3 << @key4
+        @correct_key = [@key1, @key2, @key3, @key4]
     end
 
     def no_duplicates_in_key

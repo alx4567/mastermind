@@ -4,7 +4,8 @@ class Board < Key
     def initialize
         @correct_key = [1,2,3,5]
         @prev_guess = []
-        generate_key
+        @board = []
+        # generate_key
     end
 
     # Checks if numbers are in the exact same spot as the key
@@ -31,29 +32,44 @@ class Board < Key
     end
 
     # Displays past and current guess
-    def display_board
+    def display_board(guess)
+        @board << "#{guess.join(" ")} | Bulls: #{@bulls}  Cows: #{@cows - @bulls}"
         puts "\n== Game Board =="
-        @prev_guess.each do |x|
-            puts "#{x.join(" ")} | Bulls: #{@bulls}  Cows: #{@cows - @bulls}"
-        end
+        @board.each { |x| puts x }
     end
 
     #checks if player guess matches correct key
     def game_won?(player_guess)
         @player_guess = player_guess
         @prev_guess << @player_guess
+        cows(@player_guess)
+        bulls(@player_guess)
 
         if @player_guess == @correct_key
             true
         else
-            cows(@player_guess)
-            bulls(@player_guess)
             false
         end
     end
 
     # Do players want to play a new game?
-    def stop?
-        generate_key
+    def play_again?
+        puts "Do you want to play again? (y/n)"
+        while answer = gets.chomp.downcase
+            case answer
+            when "y"
+                generate_key
+                @board = []
+                answer = false
+                break
+            when "n"
+                puts "Goodbye!"
+                answer = true
+                break
+            else
+                puts "Invalid response. Try again." 
+            end
+        end
+        answer        
     end
 end

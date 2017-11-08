@@ -35,11 +35,11 @@ until stop
     active_player.player_guess(guess[0], guess[1], guess[2], guess[3])
 
     if game.game_won?(active_player.current_guess)
-        game.display_board
+        game.display_board(active_player.current_guess)
         puts "#{active_player.name} won!"
-        stop = board.play_again?
+        stop = game.play_again?
     else
-        game.display_board
+        game.display_board(active_player.current_guess)
         if active_player == player1
             active_player = player2
         else
